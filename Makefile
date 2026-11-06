@@ -9,8 +9,10 @@ TARGET := $(BUILD_DIR)/main
 SOURCES := $(wildcard src/*.c)
 OBJECTS := $(patsubst src/%.c,$(BUILD_DIR)/src/%.o,$(SOURCES))
 LAB1_TARGET := $(BUILD_DIR)/lab1
+LAB2_TARGET := $(BUILD_DIR)/lab2
+LAB2_GAME ?= xo
 
-.PHONY: all run lab1 lab1-demo clean
+.PHONY: all run lab1 lab1-demo lab2 lab2-demo clean
 
 # 默认构建主程序
 all: $(TARGET)
@@ -40,6 +42,16 @@ $(LAB1_TARGET): lab1/main.c | $(BUILD_DIR)
 # 交互式运行 Lab 1
 lab1-demo: $(LAB1_TARGET)
 	./$(LAB1_TARGET)
+
+# 构建 Lab 2 的井字棋与五子棋
+lab2: $(LAB2_TARGET)
+
+$(LAB2_TARGET): lab2/main.c | $(BUILD_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $< $(LDLIBS) -o $@
+
+# 交互式运行 Lab 2，默认启动井字棋
+lab2-demo: $(LAB2_TARGET)
+	./$(LAB2_TARGET) $(LAB2_GAME)
 
 # 清理构建产物
 clean:
