@@ -3,7 +3,7 @@
 int main()
 {
     char board[3][3];
-    int i, j, k, m, n, d = 0, winner = 0;
+    int i, j, k, m, n, d = 0;
     for (i = 0; i < 3; i++)
     {
         for (j = 0; j < 3; j++)
@@ -77,8 +77,8 @@ int main()
             }
         }
     }
-    if (winner == 0)
-        printf("Game tied");
+
+    printf("Game tied");
 
     return 0;
 }
